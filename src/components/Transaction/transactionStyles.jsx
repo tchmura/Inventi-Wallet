@@ -2,22 +2,21 @@ import styled from 'styled-components';
 
 const labelColor = '#656969';
 
+const border = 'solid 1px #d0d6d6';
+
+const borderRadius = '5px';
+
 export const StyledTransaction = styled.div`
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-between; */
   display: grid;
   grid-template-columns: 1.3fr 1fr 1fr 0.7fr;
-  grid-template-rows: auto auto auto auto;
   grid-template-areas:
     'name name amount amount'
-    'timestamp timestamp buttons buttons'
-    ;
-  /* grid-template-columns: 2fr 1.3fr; */
+    'timestamp timestamp buttons buttons';
+  row-gap: ${props => props.isExpanded ? '8px' : '0'};
   padding: 8px;
   background-color: white;
-  border: solid 1px #d0d6d6;
-  border-radius: 5px;
+  border: ${border};
+  border-radius: ${borderRadius};
 `;
 
 export const StyledName = styled.div`
@@ -58,14 +57,13 @@ export const StyledTimestamp = styled.span`
   grid-area: timestamp;
   font-size: 16px;
   color: ${labelColor};
+  align-self: center;
 `;
 
 export const StyledButtonsWrapper = styled.div`
   grid-area: buttons;
-  text-align: right;
-`;
-
-export const StyledEdit = styled.button`
-  margin: 0;
-  padding: 0;
+  display: grid;
+  grid-template-columns: 50px 50px;
+  gap: 8px;
+  justify-self: right;
 `;

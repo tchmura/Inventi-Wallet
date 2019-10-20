@@ -8,6 +8,7 @@ import {
   StyledTimestamp,
   StyledButtonsWrapper
 } from './transactionStyles';
+import { StyledButton } from '../shared/StyledButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Transaction = ({
@@ -24,7 +25,7 @@ const Transaction = ({
   toggleExpanded
 }) => {
   return (
-    <StyledTransaction onClick={() => toggleExpanded(id)}>
+    <StyledTransaction onClick={() => toggleExpanded(id)} isExpanded={isExpanded}>
       <StyledName>{name}</StyledName>
       <StyledAmountWrapper>
         <StyledAmount orientation={orientation}>
@@ -39,10 +40,12 @@ const Transaction = ({
             <div>{date}</div>
           </StyledTimestamp>
           <StyledButtonsWrapper>
-            <button>
-              <FontAwesomeIcon icon={['far', 'edit']} />
-            </button>
-            <button>bbb</button>
+            <StyledButton bgColor='#76659c'>
+              <FontAwesomeIcon icon={['fas', 'edit']} color='white' />
+            </StyledButton>
+            <StyledButton bgColor='#b32424'>
+              <FontAwesomeIcon icon={['fas', 'eraser']} color='white' />
+            </StyledButton>
           </StyledButtonsWrapper>
         </>
       )}
