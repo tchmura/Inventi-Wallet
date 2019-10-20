@@ -8,6 +8,7 @@ import {
   StyledTimestamp,
   StyledButtonsWrapper
 } from './transactionStyles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Transaction = ({
   transaction: {
@@ -38,7 +39,9 @@ const Transaction = ({
             <div>{date}</div>
           </StyledTimestamp>
           <StyledButtonsWrapper>
-            <button>aaa</button>
+            <button>
+              <FontAwesomeIcon icon={['far', 'edit']} />
+            </button>
             <button>bbb</button>
           </StyledButtonsWrapper>
         </>

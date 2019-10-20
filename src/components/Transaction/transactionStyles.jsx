@@ -64,3 +64,8 @@ export const StyledButtonsWrapper = styled.div`
   grid-area: buttons;
   text-align: right;
 `;
+
+export const StyledEdit = styled.button`
+  margin: 0;
+  padding: 0;
+`;
