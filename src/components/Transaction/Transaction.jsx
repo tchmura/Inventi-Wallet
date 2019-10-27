@@ -22,10 +22,14 @@ const Transaction = ({
     date,
     isExpanded
   },
-  toggleExpanded
+  toggleExpanded,
+  handleEdit
 }) => {
   return (
-    <StyledTransaction onClick={() => toggleExpanded(id)} isExpanded={isExpanded}>
+    <StyledTransaction
+      onClick={() => toggleExpanded(id)}
+      isExpanded={isExpanded}
+    >
       <StyledName>{name}</StyledName>
       <StyledAmountWrapper>
         <StyledAmount orientation={orientation}>
@@ -40,7 +44,7 @@ const Transaction = ({
             <div>{date}</div>
           </StyledTimestamp>
           <StyledButtonsWrapper>
-            <StyledButton bgColor='#76659c'>
+            <StyledButton bgColor='#76659c' onClick={handleEdit}>
               <FontAwesomeIcon icon={['fas', 'edit']} color='white' />
             </StyledButton>
             <StyledButton bgColor='#b32424'>

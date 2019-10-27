@@ -5,6 +5,7 @@ const app = new Koa();
 
 let transactions = [
   {
+    id: 1,
     name: 'first transaction',
     orientation: 'IN',
     amount: 485,
@@ -13,6 +14,7 @@ let transactions = [
     date: '11.03.2018'
   },
   {
+    id: 2,
     name: 'second transaction',
     orientation: 'OUT',
     amount: 48,
@@ -21,6 +23,7 @@ let transactions = [
     date: '15.03.2018'
   },
   {
+    id: 3,
     name: 'third transaction',
     orientation: 'IN',
     amount: 7900679897,

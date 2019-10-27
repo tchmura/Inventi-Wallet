@@ -9,8 +9,7 @@ const dummyData = [
     amount: 485,
     currency: 'CZK',
     time: '14:56',
-    date: '11.03.2018',
-    isExpanded: false
+    date: '11.03.2018'
   },
   {
     id: 2,
@@ -19,8 +18,7 @@ const dummyData = [
     amount: 48,
     currency: 'EUR',
     time: '09:06',
-    date: '15.03.2018',
-    isExpanded: false
+    date: '15.03.2018'
   },
   {
     id: 3,
@@ -29,25 +27,23 @@ const dummyData = [
     amount: 7900679897,
     currency: 'GB',
     time: '20:34',
-    date: '16.03.2018',
-    isExpanded: false
+    date: '16.03.2018'
   }
 ];
 
-const TransactionsList = () => {
+const TransactionsList = ({ handleEdit }) => {
   const [transactions, setTransactions] = useState(dummyData);
 
   const toggleExpanded = transactionId => {
-    const updatedTransactions =
-      transactions.map(transaction => {
-        if (transaction.id === transactionId) {
-          transaction.isExpanded = !transaction.isExpanded;
-        } else {
-          transaction.isExpanded = false;
-        }
-        return transaction;
-      });
-    
+    const updatedTransactions = transactions.map(transaction => {
+      if (transaction.id === transactionId) {
+        transaction.isExpanded = !transaction.isExpanded;
+      } else {
+        transaction.isExpanded = false;
+      }
+      return transaction;
+    });
+
     setTransactions(updatedTransactions);
   };
 
@@ -57,6 +53,7 @@ const TransactionsList = () => {
         key={transaction.id}
         transaction={transaction}
         toggleExpanded={toggleExpanded}
+        handleEdit={() => handleEdit(transaction)}
       />
     );
   });
