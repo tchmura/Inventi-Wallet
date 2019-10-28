@@ -39,7 +39,7 @@ router.get('/transactions', async ctx => {
 });
 router.put('/transactions/:id', KoaBody(), async ctx => {
   const id = +ctx.params.id;
-  const updatedItem = ctx.request.body;
+  const updatedItem = JSON.parse(ctx.request.body);
   const index = transactions.findIndex(i => i.id === id);
   if (index === -1) {
     ctx.status = 404;
@@ -49,7 +49,7 @@ router.put('/transactions/:id', KoaBody(), async ctx => {
   }
 });
 router.post('/transactions', KoaBody(), async ctx => {
-  const newItem = ctx.request.body;
+  const newItem = JSON.parse(ctx.request.body);
   newItem.id = Math.round(Math.random() * 10000 + 1);
   transactions.push(newItem);
   ctx.body = newItem;

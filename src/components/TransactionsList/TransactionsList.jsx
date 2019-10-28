@@ -1,38 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Transaction } from '../Transaction/Transaction';
 
-const dummyData = [
-  {
-    id: 1,
-    name: 'first transaction',
-    orientation: 'IN',
-    amount: 485,
-    currency: 'CZK',
-    time: '14:56',
-    date: '11.03.2018'
-  },
-  {
-    id: 2,
-    name: 'second transaction',
-    orientation: 'OUT',
-    amount: 48,
-    currency: 'EUR',
-    time: '09:06',
-    date: '15.03.2018'
-  },
-  {
-    id: 3,
-    name: 'third transaction',
-    orientation: 'IN',
-    amount: 7900679897,
-    currency: 'GB',
-    time: '20:34',
-    date: '16.03.2018'
-  }
-];
+const TransactionsList = ({ handleEdit, transactionsLoadTrigger }) => {
+  const [transactions, setTransactions] = useState([]);
 
-const TransactionsList = ({ handleEdit }) => {
-  const [transactions, setTransactions] = useState(dummyData);
+  useEffect(() => {
+    let isSubscribed = true;
+    fetch('/transactions')
+      .then(res => res.json())
+      .then(response => isSubscribed && setTransactions(response));
+    return () => {
+      isSubscribed = false;
+    };
+  }, [transactionsLoadTrigger]);
 
   const toggleExpanded = transactionId => {
     const updatedTransactions = transactions.map(transaction => {

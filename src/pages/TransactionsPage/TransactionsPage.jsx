@@ -13,27 +13,49 @@ const TransactionsPage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [transactionToEdit, setTransactionToEdit] = useState({});
+  const [transactionsLoadTrigger, setTransactionsLoadTrigger] = useState(false);
 
   const handleEdit = transaction => {
     setTransactionToEdit(transaction);
     setIsEditing(true);
   };
 
+  const triggerTransactionsLoad = () => {
+    setTransactionsLoadTrigger(prevState => !prevState.transactionsLoadTrigger);
+  };
+
   if (!isEditing && !isCreating) {
     return (
       <StyledTransactionsPage>
-        <TransactionsList handleEdit={handleEdit} />
-        <button onClick={()=> setIsCreating(true)}>add new</button>
+        <TransactionsList
+          handleEdit={handleEdit}
+          transactionsLoadTrigger={transactionsLoadTrigger}
+        />
+        <button onClick={() => setIsCreating(true)}>add new</button>
       </StyledTransactionsPage>
     );
   }
 
   if (isEditing) {
-    return <TransactionForm transaction={transactionToEdit} purpose='edit' />;
+    return (
+      <TransactionForm
+        transaction={transactionToEdit}
+        purpose='edit'
+        triggerTransactionsLoad={triggerTransactionsLoad}
+        showTransactionsList={() => setIsEditing(false)}
+      />
+    );
   }
 
   if (isCreating) {
-    return <TransactionForm transaction={{}} purpose='create'/>;
+    return (
+      <TransactionForm
+        transaction={{orientation: 'OUT'}}
+        purpose='create'
+        triggerTransactionsLoad={triggerTransactionsLoad}
+        showTransactionsList={() => setIsCreating(false)}
+      />
+    );
   }
 };
 

@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 
-const TransactionForm = ({ purpose, transaction }) => {
+const TransactionForm = ({
+  purpose,
+  transaction,
+  triggerTransactionsLoad,
+  showTransactionsList
+}) => {
   const [newTransaction, setNewTransaction] = useState(transaction);
   const {
     id,
@@ -21,17 +26,21 @@ const TransactionForm = ({ purpose, transaction }) => {
     fetch(`/transactions/${id}`, {
       method: 'PUT',
       body: JSON.stringify(newTransaction)
-    });
+    })
+      .then(() => triggerTransactionsLoad())
+      .then(() => showTransactionsList());
   };
 
   const saveCreatedTransaction = () => {
     fetch('transactions', {
       method: 'POST',
       body: JSON.stringify(newTransaction)
-    });
+    })
+      .then(() => triggerTransactionsLoad())
+      .then(() => showTransactionsList());
   };
 
-  const saveTransaction = (event) => {
+  const saveTransaction = event => {
     event.preventDefault();
     if (purpose === 'edit') {
       return saveEditedTransaction();
@@ -57,7 +66,7 @@ const TransactionForm = ({ purpose, transaction }) => {
         <select
           name='orientation'
           onChange={handleFormElementChange}
-          defaultValue={orientation}
+          defaultValue={orientation || 'OUT'}
         >
           <option value='OUT'>-</option>
           <option value='IN'>+</option>
