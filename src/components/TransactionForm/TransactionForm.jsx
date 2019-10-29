@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 const TransactionForm = ({
   purpose,
   transaction,
-  triggerTransactionsLoad,
-  showTransactionsList
+  showTransactionsList,
+  loadTransactions
 }) => {
   const [newTransaction, setNewTransaction] = useState(transaction);
   const {
@@ -22,31 +22,31 @@ const TransactionForm = ({
     return setNewTransaction(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const saveEditedTransaction = () => {
+  const persistEditedTransaction = () => {
     fetch(`/transactions/${id}`, {
       method: 'PUT',
       body: JSON.stringify(newTransaction)
     })
-      .then(() => triggerTransactionsLoad())
+      .then(() => loadTransactions())
       .then(() => showTransactionsList());
   };
 
-  const saveCreatedTransaction = () => {
+  const persistCreatedTransaction = () => {
     fetch('transactions', {
       method: 'POST',
       body: JSON.stringify(newTransaction)
     })
-      .then(() => triggerTransactionsLoad())
+      .then(() => loadTransactions())
       .then(() => showTransactionsList());
   };
 
   const saveTransaction = event => {
     event.preventDefault();
     if (purpose === 'edit') {
-      return saveEditedTransaction();
+      return persistEditedTransaction();
     }
     if (purpose === 'create') {
-      return saveCreatedTransaction();
+      return persistCreatedTransaction();
     }
   };
 

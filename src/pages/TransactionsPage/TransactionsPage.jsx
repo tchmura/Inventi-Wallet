@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { TransactionsList } from '../../components/TransactionsList/TransactionsList';
 import { TransactionForm } from '../../components/TransactionForm/TransactionForm';
@@ -10,27 +10,53 @@ const StyledTransactionsPage = styled.div`
 `;
 
 const TransactionsPage = () => {
+  const [transactions, setTransactions] = useState([]);
+  const [transactionToEdit, setTransactionToEdit] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
-  const [transactionToEdit, setTransactionToEdit] = useState({});
-  const [transactionsLoadTrigger, setTransactionsLoadTrigger] = useState(false);
+
+  const loadTransactions = () => {
+    fetch('/transactions')
+      .then(res => res.json())
+      .then(response => setTransactions(response));
+  };
+
+  useEffect(() => {
+    loadTransactions();
+  }, []);
+
+  const toggleExpanded = transactionId => {
+    const updatedTransactions = transactions.map(transaction => {
+      if (transaction.id === transactionId) {
+        transaction.isExpanded = !transaction.isExpanded;
+      } else {
+        transaction.isExpanded = false;
+      }
+      return transaction;
+    });
+
+    setTransactions(updatedTransactions);
+  };
+
+  const handleDelete = id => {
+    fetch(`/transactions/${id}`, {
+      method: 'DELETE'
+    }).then(() => loadTransactions());
+  };
 
   const handleEdit = transaction => {
     setTransactionToEdit(transaction);
     setIsEditing(true);
   };
 
-  const triggerTransactionsLoad = () => {
-    setTransactionsLoadTrigger(prevState => !prevState);
-  };
-
   if (!isEditing && !isCreating) {
     return (
       <StyledTransactionsPage>
         <TransactionsList
+          transactions={transactions}
           handleEdit={handleEdit}
-          transactionsLoadTrigger={transactionsLoadTrigger}
-          triggerTransactionsLoad={triggerTransactionsLoad}
+          handleDelete={handleDelete}
+          toggleExpanded={toggleExpanded}
         />
         <button onClick={() => setIsCreating(true)}>add new</button>
       </StyledTransactionsPage>
@@ -42,8 +68,8 @@ const TransactionsPage = () => {
       <TransactionForm
         transaction={transactionToEdit}
         purpose='edit'
-        triggerTransactionsLoad={triggerTransactionsLoad}
         showTransactionsList={() => setIsEditing(false)}
+        loadTransactions={loadTransactions}
       />
     );
   }
@@ -59,8 +85,8 @@ const TransactionsPage = () => {
           time: '',
           date: ''
         }}
+        loadTransactions={loadTransactions}
         purpose='create'
-        triggerTransactionsLoad={triggerTransactionsLoad}
         showTransactionsList={() => setIsCreating(false)}
       />
     );
