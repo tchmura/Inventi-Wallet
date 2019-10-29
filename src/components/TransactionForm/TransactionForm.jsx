@@ -9,7 +9,7 @@ const TransactionForm = ({
   const [newTransaction, setNewTransaction] = useState(transaction);
   const {
     id,
-    name: transactioName,
+    name,
     orientation,
     amount,
     currency,
@@ -57,7 +57,7 @@ const TransactionForm = ({
         <input
           type='text'
           name='name'
-          value={transactioName}
+          value={name}
           onChange={handleFormElementChange}
         />
       </div>

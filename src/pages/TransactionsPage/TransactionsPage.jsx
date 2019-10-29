@@ -51,7 +51,14 @@ const TransactionsPage = () => {
   if (isCreating) {
     return (
       <TransactionForm
-        transaction={{ orientation: 'OUT' }}
+        transaction={{
+          name: '',
+          orientation: 'OUT',
+          amount: '',
+          currency: '',
+          time: '',
+          date: ''
+        }}
         purpose='create'
         triggerTransactionsLoad={triggerTransactionsLoad}
         showTransactionsList={() => setIsCreating(false)}
