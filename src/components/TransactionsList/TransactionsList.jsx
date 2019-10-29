@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Transaction } from '../Transaction/Transaction';
 
-const TransactionsList = ({ handleEdit, transactionsLoadTrigger }) => {
+const TransactionsList = ({
+  handleEdit,
+  transactionsLoadTrigger,
+  triggerTransactionsLoad
+}) => {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
@@ -27,6 +31,12 @@ const TransactionsList = ({ handleEdit, transactionsLoadTrigger }) => {
     setTransactions(updatedTransactions);
   };
 
+  const handleDelete = id => {
+    fetch(`/transactions/${id}`, {
+      method: 'DELETE'
+    }).then(() => triggerTransactionsLoad());
+  };
+
   return transactions.map(transaction => {
     return (
       <Transaction
@@ -34,6 +44,7 @@ const TransactionsList = ({ handleEdit, transactionsLoadTrigger }) => {
         transaction={transaction}
         toggleExpanded={toggleExpanded}
         handleEdit={() => handleEdit(transaction)}
+        handleDelete={() => handleDelete(transaction.id)}
       />
     );
   });

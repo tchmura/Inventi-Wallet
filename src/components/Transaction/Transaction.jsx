@@ -23,7 +23,8 @@ const Transaction = ({
     isExpanded
   },
   toggleExpanded,
-  handleEdit
+  handleEdit,
+  handleDelete
 }) => {
   return (
     <StyledTransaction
@@ -47,7 +48,7 @@ const Transaction = ({
             <StyledButton bgColor='#76659c' onClick={handleEdit}>
               <FontAwesomeIcon icon={['fas', 'edit']} color='white' />
             </StyledButton>
-            <StyledButton bgColor='#b32424'>
+            <StyledButton bgColor='#b32424' onClick={handleDelete}>
               <FontAwesomeIcon icon={['fas', 'eraser']} color='white' />
             </StyledButton>
           </StyledButtonsWrapper>

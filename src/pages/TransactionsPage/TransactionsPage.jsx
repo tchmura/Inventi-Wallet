@@ -21,7 +21,7 @@ const TransactionsPage = () => {
   };
 
   const triggerTransactionsLoad = () => {
-    setTransactionsLoadTrigger(prevState => !prevState.transactionsLoadTrigger);
+    setTransactionsLoadTrigger(prevState => !prevState);
   };
 
   if (!isEditing && !isCreating) {
@@ -30,6 +30,7 @@ const TransactionsPage = () => {
         <TransactionsList
           handleEdit={handleEdit}
           transactionsLoadTrigger={transactionsLoadTrigger}
+          triggerTransactionsLoad={triggerTransactionsLoad}
         />
         <button onClick={() => setIsCreating(true)}>add new</button>
       </StyledTransactionsPage>
@@ -50,7 +51,7 @@ const TransactionsPage = () => {
   if (isCreating) {
     return (
       <TransactionForm
-        transaction={{orientation: 'OUT'}}
+        transaction={{ orientation: 'OUT' }}
         purpose='create'
         triggerTransactionsLoad={triggerTransactionsLoad}
         showTransactionsList={() => setIsCreating(false)}
