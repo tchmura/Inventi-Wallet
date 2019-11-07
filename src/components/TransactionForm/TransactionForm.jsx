@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const TransactionForm = ({
   purpose,
@@ -7,6 +7,7 @@ const TransactionForm = ({
   loadTransactions
 }) => {
   const [newTransaction, setNewTransaction] = useState(transaction);
+  const [validationErrors, setValidationErrors] = useState({});
   const {
     id,
     name,
@@ -16,10 +17,63 @@ const TransactionForm = ({
     time,
     date
   } = newTransaction;
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const validateFormField = (fieldName, value) => {
+    let result;
+    switch (fieldName) {
+      case 'name':
+        // non-empty string
+        result = /^(?!\s*$).+/.test(value)
+          ? ''
+          : 'Must contain at least one character';
+        setValidationErrors(prevState => ({
+          ...prevState,
+          name: result
+        }));
+        break;
+      case 'amount':
+        // only numbers
+        result = /^\d+$/.test(value) ? '' : 'Use only numbers';
+        setValidationErrors(prevState => ({
+          ...prevState,
+          amount: result
+        }));
+        break;
+      case 'time':
+        // HH:MM
+        result = /^\d\d[':']\d\d$/.test(value)
+          ? ''
+          : 'Use time in format HH:MM';
+        setValidationErrors(prevState => ({
+          ...prevState,
+          time: result
+        }));
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    if (Object.values(validationErrors).every(val => !!val === false)) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [validationErrors]);
+
+  useEffect(() => {
+    Object.entries(newTransaction).forEach(entry =>
+      validateFormField(entry[0], entry[1])
+    );
+  }, [newTransaction]);
 
   const handleFormElementChange = event => {
     const { name, value } = event.target;
-    return setNewTransaction(prevState => ({ ...prevState, [name]: value }));
+    validateFormField(name, value);
+    setNewTransaction(prevState => ({ ...prevState, [name]: value }));
   };
 
   const persistEditedTransaction = () => {
@@ -72,25 +126,46 @@ const TransactionForm = ({
           <option value='IN'>+</option>
         </select>
         <input
+          type='number'
           name='amount'
           value={amount}
           onChange={handleFormElementChange}
         />
-        <input
+        <select
           name='currency'
           value={currency}
+          onChange={handleFormElementChange}
+        >
+          <option value='CZK'>CZK</option>
+          <option value='EUR'>EUR</option>
+          <option value='USD'>USD</option>
+          <option value='GBP'>GBP</option>
+        </select>
+      </div>
+      <div>
+        <label htmlFor='time'>Time</label>
+        <input
+          name='time'
+          type='time'
+          value={time}
           onChange={handleFormElementChange}
         />
       </div>
       <div>
-        <label htmlFor='time'>Time</label>
-        <input name='time' value={time} onChange={handleFormElementChange} />
-      </div>
-      <div>
         <label htmlFor='date'>Date</label>
-        <input name='date' value={date} onChange={handleFormElementChange} />
+        <input
+          type='date'
+          name='date'
+          value={date}
+          onChange={handleFormElementChange}
+        />
       </div>
-      <button type='submit'>Save</button>
+      <button type='submit' disabled={!isFormValid}>
+        Save
+      </button>
+      <button type='button' onClick={() => showTransactionsList()}>
+        Cancel
+      </button>
     </form>
   );
 };

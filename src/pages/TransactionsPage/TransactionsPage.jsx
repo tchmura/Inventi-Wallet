@@ -81,9 +81,9 @@ const TransactionsPage = () => {
           name: '',
           orientation: 'OUT',
           amount: '',
-          currency: '',
+          currency: 'CZK',
           time: '',
-          date: ''
+          date: new Date().toISOString().substr(0, 10)
         }}
         loadTransactions={loadTransactions}
         purpose='create'

@@ -42,7 +42,7 @@ const Transaction = ({
         <>
           <StyledTimestamp>
             <div>{time}</div>
-            <div>{date}</div>
+            <div>{new Date(date).toLocaleDateString('cs')}</div>
           </StyledTimestamp>
           <StyledButtonsWrapper>
             <StyledButton bgColor='#76659c' onClick={handleEdit}>

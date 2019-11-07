@@ -11,7 +11,7 @@ let transactions = [
     amount: 485,
     currency: 'CZK',
     time: '14:56',
-    date: '11.03.2018'
+    date: new Date('2018-03-05').toISOString().substr(0, 10)
   },
   {
     id: 2,
@@ -20,16 +20,16 @@ let transactions = [
     amount: 48,
     currency: 'EUR',
     time: '09:06',
-    date: '15.03.2018'
+    date: new Date('2018-03-09').toISOString().substr(0, 10)
   },
   {
     id: 3,
     name: 'third transaction',
     orientation: 'IN',
     amount: 7900679897,
-    currency: 'GB',
+    currency: 'GBP',
     time: '20:34',
-    date: '16.03.2018'
+    date: new Date('2018-03-12').toISOString().substr(0, 10)
   }
 ];
 
