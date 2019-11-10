@@ -9,7 +9,7 @@ import { TransactionAction } from './components/TransactionAction/TransactionAct
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route exact path='/transactions' component={App} />
+      <Route exact path='/' component={App} />
       <Route path='/transactions/:action' component={TransactionAction} />
       <Route path='/balances' component={BalancesPage} />
     </Switch>

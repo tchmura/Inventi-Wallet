@@ -8,8 +8,11 @@ const TransactionAction = () => {
 
   if (params.action === 'new') {
     const today = new Date();
+    const rawMinutes = today.getUTCMinutes();
+    const minutes = rawMinutes < 10 ? `0${rawMinutes}` : rawMinutes;
+
     // current time in format for time input
-    const now = `${today.getUTCHours() + 1}:${today.getUTCMinutes()}`;
+    const now = `${today.getUTCHours() + 1}:${minutes}`;
     return (
       <TransactionForm
         transaction={{

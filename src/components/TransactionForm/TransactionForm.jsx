@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import {
+  StyledForm,
+  StyledFormSection,
+  StyledAmount,
+  StyledHeading,
+  StyledInput,
+  StyledSelect,
+  StyledLabel,
+  StyledFormButton
+} from './transactionFormStyles';
 
-const TransactionForm = ({ action, transaction }) => {
+export const TransactionForm = ({ action, transaction }) => {
   const [transactionToModify, setTransactionToModify] = useState(transaction);
   const [validationErrors, setValidationErrors] = useState({});
   const {
@@ -104,70 +114,86 @@ const TransactionForm = ({ action, transaction }) => {
     }
   };
 
+  const heading =
+    action === 'new' ? 'Create new transaction' : 'Edit your transaction';
+
   return (
-    <form onSubmit={saveTransaction}>
-      <div>
-        <label htmlFor='name'>Name</label>
-        <input
-          type='text'
-          name='name'
-          value={name}
-          onChange={handleFormElementChange}
-        />
-      </div>
-      <div>
-        <label htmlFor='amount'>Amount</label>
-        <select
-          name='orientation'
-          onChange={handleFormElementChange}
-          defaultValue={orientation || 'OUT'}
+    <>
+      <StyledHeading>{heading}</StyledHeading>
+      <StyledForm onSubmit={saveTransaction}>
+        <StyledFormSection>
+          <StyledLabel htmlFor='name'>Name</StyledLabel>
+          <StyledInput
+            type='text'
+            name='name'
+            value={name}
+            onChange={handleFormElementChange}
+            validationError={validationErrors.name}
+          />
+        </StyledFormSection>
+        <StyledFormSection>
+          <StyledLabel htmlFor='amount'>Amount</StyledLabel>
+          <StyledAmount>
+            <StyledSelect
+              name='orientation'
+              onChange={handleFormElementChange}
+              defaultValue={orientation}
+            >
+              <option value='OUT'>-</option>
+              <option value='IN'>+</option>
+            </StyledSelect>
+            <StyledInput
+              type='number'
+              name='amount'
+              value={amount}
+              onChange={handleFormElementChange}
+              validationError={validationErrors.amount}
+            />
+            <StyledSelect
+              name='currency'
+              value={currency}
+              onChange={handleFormElementChange}
+            >
+              <option value='CZK'>CZK</option>
+              <option value='EUR'>EUR</option>
+              <option value='USD'>USD</option>
+              <option value='GBP'>GBP</option>
+            </StyledSelect>
+          </StyledAmount>
+        </StyledFormSection>
+        <StyledFormSection>
+          <StyledLabel htmlFor='time'>Time</StyledLabel>
+          <StyledInput
+            name='time'
+            type='time'
+            value={time}
+            onChange={handleFormElementChange}
+          />
+        </StyledFormSection>
+        <StyledFormSection>
+          <StyledLabel htmlFor='date'>Date</StyledLabel>
+          <StyledInput
+            type='date'
+            name='date'
+            value={date}
+            onChange={handleFormElementChange}
+          />
+        </StyledFormSection>
+        <StyledFormButton
+          type='submit'
+          disabled={!isFormValid}
+          bgColor='#76659c'
         >
-          <option value='OUT'>-</option>
-          <option value='IN'>+</option>
-        </select>
-        <input
-          type='number'
-          name='amount'
-          value={amount}
-          onChange={handleFormElementChange}
-        />
-        <select
-          name='currency'
-          value={currency}
-          onChange={handleFormElementChange}
+          Save
+        </StyledFormButton>
+        <StyledFormButton
+          type='button'
+          onClick={() => redirectToTransactions()}
+          bgColor='grey'
         >
-          <option value='CZK'>CZK</option>
-          <option value='EUR'>EUR</option>
-          <option value='USD'>USD</option>
-          <option value='GBP'>GBP</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor='time'>Time</label>
-        <input
-          name='time'
-          type='time'
-          value={time}
-          onChange={handleFormElementChange}
-        />
-      </div>
-      <div>
-        <label htmlFor='date'>Date</label>
-        <input
-          type='date'
-          name='date'
-          value={date}
-          onChange={handleFormElementChange}
-        />
-      </div>
-      <button type='submit' disabled={!isFormValid}>
-        Save
-      </button>
-      <button type='button' onClick={() => redirectToTransactions()}>
-        Cancel
-      </button>
-    </form>
+          Cancel
+        </StyledFormButton>
+      </StyledForm>
+    </>
   );
 };
-
-export { TransactionForm };

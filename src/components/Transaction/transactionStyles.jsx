@@ -2,9 +2,9 @@ import styled from 'styled-components/macro';
 
 const labelColor = '#656969';
 
-const border = 'solid 1px #d0d6d6';
+export const border = 'solid 1px #d0d6d6';
 
-const borderRadius = '5px';
+export const borderRadius = '5px';
 
 export const StyledTransaction = styled.div`
   display: grid;
@@ -12,7 +12,7 @@ export const StyledTransaction = styled.div`
   grid-template-areas:
     'name name amount amount'
     'timestamp timestamp buttons buttons';
-  row-gap: ${props => props.isExpanded ? '8px' : '0'};
+  row-gap: ${props => (props.isExpanded ? '8px' : '0')};
   padding: 8px;
   background-color: white;
   border: ${border};
