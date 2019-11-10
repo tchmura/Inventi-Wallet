@@ -4,11 +4,13 @@ import './index.css';
 import App from './App';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { BalancesPage } from './pages/BalancesPage/BalancesPage';
+import { TransactionAction } from './components/TransactionAction/TransactionAction';
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route exact path='/' component={App} />
+      <Route exact path='/transactions' component={App} />
+      <Route path='/transactions/:action' component={TransactionAction} />
       <Route path='/balances' component={BalancesPage} />
     </Switch>
   </BrowserRouter>,

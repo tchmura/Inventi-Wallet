@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
-const TransactionForm = ({
-  purpose,
-  transaction,
-  showTransactionsList,
-  loadTransactions
-}) => {
-  const [newTransaction, setNewTransaction] = useState(transaction);
+const TransactionForm = ({ action, transaction }) => {
+  const [transactionToModify, setTransactionToModify] = useState(transaction);
   const [validationErrors, setValidationErrors] = useState({});
   const {
     id,
@@ -16,7 +12,7 @@ const TransactionForm = ({
     currency,
     time,
     date
-  } = newTransaction;
+  } = transactionToModify;
   const [isFormValid, setIsFormValid] = useState(false);
 
   const validateFormField = (fieldName, value) => {
@@ -65,42 +61,46 @@ const TransactionForm = ({
   }, [validationErrors]);
 
   useEffect(() => {
-    Object.entries(newTransaction).forEach(entry =>
+    Object.entries(transactionToModify).forEach(entry =>
       validateFormField(entry[0], entry[1])
     );
-  }, [newTransaction]);
+  }, [transactionToModify]);
 
   const handleFormElementChange = event => {
     const { name, value } = event.target;
     validateFormField(name, value);
-    setNewTransaction(prevState => ({ ...prevState, [name]: value }));
+    setTransactionToModify(prevState => ({ ...prevState, [name]: value }));
   };
 
   const persistEditedTransaction = () => {
-    fetch(`/transactions/${id}`, {
+    return fetch(`/transactions/${id}`, {
       method: 'PUT',
-      body: JSON.stringify(newTransaction)
-    })
-      .then(() => loadTransactions())
-      .then(() => showTransactionsList());
+      body: JSON.stringify(transactionToModify)
+    });
   };
 
-  const persistCreatedTransaction = () => {
-    fetch('transactions', {
+  const persistNewTransaction = () => {
+    return fetch('/transactions', {
       method: 'POST',
-      body: JSON.stringify(newTransaction)
-    })
-      .then(() => loadTransactions())
-      .then(() => showTransactionsList());
+      body: JSON.stringify(transactionToModify)
+    });
   };
 
-  const saveTransaction = event => {
+  const history = useHistory();
+
+  const redirectToTransactions = () => {
+    history.push('/transactions');
+  };
+
+  const saveTransaction = async event => {
     event.preventDefault();
-    if (purpose === 'edit') {
-      return persistEditedTransaction();
+    if (action === 'edit') {
+      await persistEditedTransaction();
+      redirectToTransactions();
     }
-    if (purpose === 'create') {
-      return persistCreatedTransaction();
+    if (action === 'new') {
+      await persistNewTransaction();
+      redirectToTransactions();
     }
   };
 
@@ -163,7 +163,7 @@ const TransactionForm = ({
       <button type='submit' disabled={!isFormValid}>
         Save
       </button>
-      <button type='button' onClick={() => showTransactionsList()}>
+      <button type='button' onClick={() => redirectToTransactions()}>
         Cancel
       </button>
     </form>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { TransactionsList } from '../../components/TransactionsList/TransactionsList';
-import { TransactionForm } from '../../components/TransactionForm/TransactionForm';
+import { useHistory } from 'react-router-dom';
 
 const StyledTransactionsPage = styled.div`
   display: grid;
@@ -11,9 +11,6 @@ const StyledTransactionsPage = styled.div`
 
 const TransactionsPage = () => {
   const [transactions, setTransactions] = useState([]);
-  const [transactionToEdit, setTransactionToEdit] = useState({});
-  const [isEditing, setIsEditing] = useState(false);
-  const [isCreating, setIsCreating] = useState(false);
 
   const loadTransactions = () => {
     fetch('/transactions')
@@ -44,53 +41,27 @@ const TransactionsPage = () => {
     }).then(() => loadTransactions());
   };
 
-  const handleEdit = transaction => {
-    setTransactionToEdit(transaction);
-    setIsEditing(true);
+  const history = useHistory();
+
+  const redirectToNew = () => {
+    history.push('transactions/new');
   };
 
-  if (!isEditing && !isCreating) {
-    return (
-      <StyledTransactionsPage>
-        <TransactionsList
-          transactions={transactions}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          toggleExpanded={toggleExpanded}
-        />
-        <button onClick={() => setIsCreating(true)}>add new</button>
-      </StyledTransactionsPage>
-    );
-  }
+  const redirectToEdit = transaction => {
+    history.push('transactions/edit', { transaction });
+  };
 
-  if (isEditing) {
-    return (
-      <TransactionForm
-        transaction={transactionToEdit}
-        purpose='edit'
-        showTransactionsList={() => setIsEditing(false)}
-        loadTransactions={loadTransactions}
+  return (
+    <StyledTransactionsPage>
+      <TransactionsList
+        transactions={transactions}
+        handleEdit={redirectToEdit}
+        handleDelete={handleDelete}
+        toggleExpanded={toggleExpanded}
       />
-    );
-  }
-
-  if (isCreating) {
-    return (
-      <TransactionForm
-        transaction={{
-          name: '',
-          orientation: 'OUT',
-          amount: '',
-          currency: 'CZK',
-          time: '',
-          date: new Date().toISOString().substr(0, 10)
-        }}
-        loadTransactions={loadTransactions}
-        purpose='create'
-        showTransactionsList={() => setIsCreating(false)}
-      />
-    );
-  }
+      <button onClick={redirectToNew}>add new</button>
+    </StyledTransactionsPage>
+  );
 };
 
 export { TransactionsPage };
