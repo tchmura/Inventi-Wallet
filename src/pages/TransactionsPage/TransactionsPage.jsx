@@ -2,11 +2,26 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { TransactionsList } from '../../components/TransactionsList/TransactionsList';
 import { useHistory } from 'react-router-dom';
+import { StyledButton } from '../../components/shared/StyledButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const StyledTransactionsPage = styled.div`
   display: grid;
   grid-template-rows: 1fr;
   gap: 5px;
+`;
+
+const AddNewButton = styled(StyledButton)`
+  background-color: #76659c;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 0;
+  margin-top: 15px;
+`;
+
+const AddNewText = styled.span`
+  margin-right: 20px;
 `;
 
 const TransactionsPage = () => {
@@ -59,7 +74,10 @@ const TransactionsPage = () => {
         handleDelete={handleDelete}
         toggleExpanded={toggleExpanded}
       />
-      <button onClick={redirectToNew}>add new</button>
+      <AddNewButton onClick={redirectToNew}>
+        <AddNewText>Add new</AddNewText>
+        <FontAwesomeIcon icon={['fas', 'plus']} color='#B6A7D4' />
+      </AddNewButton>
     </StyledTransactionsPage>
   );
 };
