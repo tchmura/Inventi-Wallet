@@ -6,7 +6,8 @@ import {
   faEdit,
   faSave,
   faEraser,
-  faPlus
+  faPlus,
+  faChartBar
 } from '@fortawesome/free-solid-svg-icons';
 
 const App = () => {
@@ -15,4 +16,4 @@ const App = () => {
 
 export default App;
 
-library.add(faEdit, faSave, faEraser, faPlus);
+library.add(faEdit, faSave, faEraser, faPlus, faChartBar);

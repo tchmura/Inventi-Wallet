@@ -1,9 +1,10 @@
 import styled from 'styled-components/macro';
+import { border, borderRadius } from '../Transaction/transactionStyles';
 
 export const StyledButton = styled.button`
   margin: 0;
   padding: 4px 10px;
-  border: solid 1px #d0d6d6;
-  border-radius: 5px;
+  border: ${border};
+  border-radius: ${borderRadius};
   background-color: ${props => props.bgColor};
 `;
