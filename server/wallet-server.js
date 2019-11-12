@@ -27,10 +27,118 @@ let transactions = [
     id: uuid(),
     name: 'third transaction',
     orientation: 'IN',
-    amount: 7900679897,
+    amount: 1345,
     currency: 'GBP',
     time: '20:34',
     date: new Date('2018-03-12').toISOString().substr(0, 10)
+  },
+  {
+    id: uuid(),
+    name: 'computer',
+    orientation: 'OUT',
+    amount: 66000,
+    currency: 'CZK',
+    time: '17:06',
+    date: new Date('2018-04-09').toISOString().substr(0, 10)
+  },
+  {
+    id: uuid(),
+    name: 'FTE salary',
+    orientation: 'IN',
+    amount: 19000,
+    currency: 'CZK',
+    time: '09:55',
+    date: new Date('2018-04-11').toISOString().substr(0, 10)
+  },
+  {
+    id: uuid(),
+    name: 'project abroad',
+    orientation: 'IN',
+    amount: 1200,
+    currency: 'EUR',
+    time: '23:33',
+    date: new Date('2018-04-22').toISOString().substr(0, 10)
+  },
+  {
+    id: uuid(),
+    name: 'fish',
+    orientation: 'OUT',
+    amount: 450,
+    currency: 'CZK',
+    time: '09:06',
+    date: new Date('2018-05-01').toISOString().substr(0, 10)
+  },
+  {
+    id: uuid(),
+    name: 'FTE salary',
+    orientation: 'IN',
+    amount: 19000,
+    currency: 'CZK',
+    time: '09:23',
+    date: new Date('2018-05-11').toISOString().substr(0, 10)
+  },
+  {
+    id: uuid(),
+    name: 'project abroad',
+    orientation: 'IN',
+    amount: 1200,
+    currency: 'EUR',
+    time: '22:16',
+    date: new Date('2018-05-22').toISOString().substr(0, 10)
+  },
+  {
+    id: uuid(),
+    name: 'rohlik',
+    orientation: 'OUT',
+    amount: 1239,
+    currency: 'CZK',
+    time: '12:06',
+    date: new Date('2018-05-19').toISOString().substr(0, 10)
+  },
+  {
+    id: uuid(),
+    name: 'vecere',
+    orientation: 'OUT',
+    amount: 700,
+    currency: 'CZK',
+    time: '20:34',
+    date: new Date('2018-05-28').toISOString().substr(0, 10)
+  },
+  {
+    id: uuid(),
+    name: 'FTE salary',
+    orientation: 'IN',
+    amount: 19000,
+    currency: 'CZK',
+    time: '09:48',
+    date: new Date('2018-06-11').toISOString().substr(0, 10)
+  },
+  {
+    id: uuid(),
+    name: 'project abroad',
+    orientation: 'IN',
+    amount: 1200,
+    currency: 'EUR',
+    time: '22:10',
+    date: new Date('2018-06-22').toISOString().substr(0, 10)
+  },
+  {
+    id: uuid(),
+    name: 'trip',
+    orientation: 'OUT',
+    amount: 350,
+    currency: 'GB',
+    time: '17:23',
+    date: new Date('2018-06-25').toISOString().substr(0, 10)
+  },
+  {
+    id: uuid(),
+    name: 'fish and chips',
+    orientation: 'OUT',
+    amount: 23,
+    currency: 'GB',
+    time: '12:15',
+    date: new Date('2018-06-26').toISOString().substr(0, 10)
   }
 ];
 
