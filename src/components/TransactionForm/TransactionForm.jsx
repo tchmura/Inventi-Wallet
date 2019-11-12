@@ -99,7 +99,7 @@ export const TransactionForm = ({ action, transaction }) => {
   const history = useHistory();
 
   const redirectToTransactions = () => {
-    history.push('/transactions');
+    history.push('/');
   };
 
   const saveTransaction = async event => {
