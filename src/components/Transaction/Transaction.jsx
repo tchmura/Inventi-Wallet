@@ -34,7 +34,7 @@ const Transaction = ({
       <StyledName>{name}</StyledName>
       <StyledAmountWrapper>
         <StyledAmount orientation={orientation}>
-          {orientation === 'IN' ? '+' : '-'} {amount}
+          {orientation === 'IN' ? '+' : '-'} {amount.toLocaleString('cs')}
         </StyledAmount>
         <StyledCurrency>{currency}</StyledCurrency>
       </StyledAmountWrapper>

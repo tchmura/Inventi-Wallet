@@ -48,4 +48,5 @@ export const StyledBalancesButton = styled(StyledButton)`
   background-color: #76659c;
   padding: 8px 16px;
   font-size: 18px;
+  border: none;
 `;
