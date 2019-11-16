@@ -7,8 +7,7 @@ export const MonthChart = ({ transactions }) => {
   const serializedTransactionsForMonthly = convertTransactionsToCzk(
     transactions
   ).map(transaction => {
-    transaction.date = transaction.date.slice(0, 7);
-    return transaction;
+    return { ...transaction, date: transaction.date.slice(0, 7) };
   });
 
   const monthlyBalance = serializedTransactionsForMonthly.reduce(

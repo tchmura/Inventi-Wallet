@@ -58,7 +58,7 @@ const TransactionsPage = () => {
   };
 
   const redirectToBalances = () => {
-    history.push('/balances', { transactions });
+    history.push('/balances');
   };
 
   return (
