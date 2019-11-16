@@ -1,7 +1,7 @@
 import { Bar } from '@nivo/bar';
 import React from 'react';
 import { StyledTitle } from './balancesStyles';
-import { convertTransactionsToCzk } from '../../components/shared/utils';
+import { convertTransactionsToCzk } from '../shared/utils';
 
 export const MonthChart = ({ transactions }) => {
   const serializedTransactionsForMonthly = convertTransactionsToCzk(

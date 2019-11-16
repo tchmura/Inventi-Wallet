@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { MonthChart } from './MonthChart';
-import { TotalBalance } from './TotalBalance';
-import { StyledBalance } from './balancesStyles';
+import { MonthChart } from '../../components/Balances/MonthChart';
+import { TotalBalance } from '../../components/Balances/TotalBalance';
+import { StyledBalance } from '../../components/Balances/balancesStyles';
 
 export const BalancesPage = () => {
   const location = useLocation();
