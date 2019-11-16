@@ -12,7 +12,7 @@ let transactions = [
     amount: 485,
     currency: 'CZK',
     time: '14:56',
-    date: new Date('2018-03-05').toISOString().substr(0, 10)
+    date: new Date('2019-03-05').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -21,7 +21,7 @@ let transactions = [
     amount: 48,
     currency: 'EUR',
     time: '09:06',
-    date: new Date('2018-03-09').toISOString().substr(0, 10)
+    date: new Date('2019-03-09').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -30,7 +30,7 @@ let transactions = [
     amount: 1345,
     currency: 'GBP',
     time: '20:34',
-    date: new Date('2018-03-12').toISOString().substr(0, 10)
+    date: new Date('2019-03-12').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -39,7 +39,7 @@ let transactions = [
     amount: 66000,
     currency: 'CZK',
     time: '17:06',
-    date: new Date('2018-04-09').toISOString().substr(0, 10)
+    date: new Date('2019-04-09').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -48,7 +48,7 @@ let transactions = [
     amount: 19000,
     currency: 'CZK',
     time: '09:55',
-    date: new Date('2018-04-11').toISOString().substr(0, 10)
+    date: new Date('2019-04-11').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -57,7 +57,7 @@ let transactions = [
     amount: 1200,
     currency: 'EUR',
     time: '23:33',
-    date: new Date('2018-04-22').toISOString().substr(0, 10)
+    date: new Date('2019-04-22').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -66,7 +66,7 @@ let transactions = [
     amount: 450,
     currency: 'CZK',
     time: '09:06',
-    date: new Date('2018-05-01').toISOString().substr(0, 10)
+    date: new Date('2019-05-01').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -75,7 +75,7 @@ let transactions = [
     amount: 19000,
     currency: 'CZK',
     time: '09:23',
-    date: new Date('2018-05-11').toISOString().substr(0, 10)
+    date: new Date('2019-05-11').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -84,7 +84,7 @@ let transactions = [
     amount: 1200,
     currency: 'EUR',
     time: '22:16',
-    date: new Date('2018-05-22').toISOString().substr(0, 10)
+    date: new Date('2019-05-22').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -93,7 +93,7 @@ let transactions = [
     amount: 1239,
     currency: 'CZK',
     time: '12:06',
-    date: new Date('2018-05-19').toISOString().substr(0, 10)
+    date: new Date('2019-05-19').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -102,7 +102,7 @@ let transactions = [
     amount: 700,
     currency: 'CZK',
     time: '20:34',
-    date: new Date('2018-05-28').toISOString().substr(0, 10)
+    date: new Date('2019-05-28').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -111,7 +111,7 @@ let transactions = [
     amount: 19000,
     currency: 'CZK',
     time: '09:48',
-    date: new Date('2018-06-11').toISOString().substr(0, 10)
+    date: new Date('2019-06-11').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -120,7 +120,7 @@ let transactions = [
     amount: 1200,
     currency: 'EUR',
     time: '22:10',
-    date: new Date('2018-06-22').toISOString().substr(0, 10)
+    date: new Date('2019-06-22').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -129,7 +129,7 @@ let transactions = [
     amount: 350,
     currency: 'GB',
     time: '17:23',
-    date: new Date('2018-06-25').toISOString().substr(0, 10)
+    date: new Date('2019-06-25').toISOString().substr(0, 10)
   },
   {
     id: uuid(),
@@ -138,7 +138,7 @@ let transactions = [
     amount: 23,
     currency: 'GB',
     time: '12:15',
-    date: new Date('2018-06-26').toISOString().substr(0, 10)
+    date: new Date('2019-06-26').toISOString().substr(0, 10)
   }
 ];
 
