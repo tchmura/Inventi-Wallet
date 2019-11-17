@@ -50,3 +50,14 @@ export const StyledBalancesButton = styled(StyledButton)`
   font-size: 18px;
   border: none;
 `;
+
+export const StyledPageButtonGroup = styled.div`
+  text-align: center;
+  margin-top: 15px;
+`;
+
+export const StyledPageButton = styled(StyledButton)`
+  background-color: ${props => (props.selected ? '#529aa8' : '#b8eaf2')};
+  margin-right: 5px;
+  color: ${props => (props.selected ? 'white' : '#529aa8')};
+`;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   TransactionsList,
   StyledTransactionsList
@@ -10,7 +10,9 @@ import {
   AddNewText,
   StyledButtonGroup,
   StyledFilterButton,
-  StyledBalancesButton
+  StyledBalancesButton,
+  StyledPageButton,
+  StyledPageButtonGroup
 } from './transactionsPageStyles';
 import { useLoadedTransactions } from '../../components/lib/useLoadedTransactions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,7 +23,9 @@ const TransactionsPage = () => {
     setTransactions,
     reloadTransactions
   ] = useLoadedTransactions(null);
+  const [transactionsToDisplay, setTransactionsToDisplay] = useState(null);
   const [filter, setFilter] = useState('ALL');
+  const [currentPage, setCurrentPage] = useState(0);
   const history = useHistory();
 
   const toggleExpanded = transactionId => {
@@ -37,6 +41,24 @@ const TransactionsPage = () => {
       });
 
     setTransactions(updatedTransactions);
+  };
+
+  const setPagination = useCallback(
+    pageNumber => {
+      transactions &&
+        setTransactionsToDisplay(
+          transactions.slice(pageNumber * 5, pageNumber * 5 + 5)
+        );
+    },
+    [transactions]
+  );
+
+  useEffect(() => {
+    setPagination(currentPage);
+  }, [transactions, currentPage, setPagination]);
+
+  const getButtons = () => {
+    return Array(Math.round(transactions.length / 5)).fill();
   };
 
   const handleDelete = id => {
@@ -84,13 +106,25 @@ const TransactionsPage = () => {
       </StyledButtonGroup>
       <StyledTransactionsList>
         <TransactionsList
-          transactions={transactions}
+          transactions={transactionsToDisplay}
           handleEdit={redirectToEdit}
           handleDelete={handleDelete}
           toggleExpanded={toggleExpanded}
           filter={filter}
         />
       </StyledTransactionsList>
+      <StyledPageButtonGroup>
+        {transactions &&
+          getButtons().map((_, index) => (
+            <StyledPageButton
+              selected={currentPage === index}
+              onClick={() => setCurrentPage(index)}
+              key={index}
+            >
+              {index + 1}
+            </StyledPageButton>
+          ))}
+      </StyledPageButtonGroup>
       <AddNewButton onClick={redirectToNew}>
         <AddNewText>Add new</AddNewText>
         <FontAwesomeIcon icon={['fas', 'plus']} color='#B6A7D4' />
