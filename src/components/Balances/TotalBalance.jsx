@@ -1,5 +1,5 @@
 import React from 'react';
-import { convertTransactionsToCzk } from '../shared/utils';
+import { convertTransactionsToCzk } from '../lib/utils';
 import { StyledTitle, StyledAmount } from './balancesStyles';
 
 export const TotalBalance = ({ transactions }) => {

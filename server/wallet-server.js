@@ -127,7 +127,7 @@ let transactions = [
     name: 'trip',
     orientation: 'OUT',
     amount: 350,
-    currency: 'GB',
+    currency: 'GBP',
     time: '17:23',
     date: new Date('2019-06-25').toISOString().substr(0, 10)
   },
@@ -136,7 +136,7 @@ let transactions = [
     name: 'fish and chips',
     orientation: 'OUT',
     amount: 23,
-    currency: 'GB',
+    currency: 'GBP',
     time: '12:15',
     date: new Date('2019-06-26').toISOString().substr(0, 10)
   }
@@ -154,12 +154,14 @@ router.put('/transactions/:id', KoaBody(), async ctx => {
     ctx.status = 404;
   } else {
     transactions[index] = updatedItem;
+    updatedItem.amount = +updatedItem.amount;
     ctx.body = updatedItem;
   }
 });
 router.post('/transactions', KoaBody(), async ctx => {
   const newItem = JSON.parse(ctx.request.body);
   newItem.id = uuid();
+  newItem.amount = +newItem.amount;
   transactions.push(newItem);
   ctx.body = newItem;
   ctx.status = 201;

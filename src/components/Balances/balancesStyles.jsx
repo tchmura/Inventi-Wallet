@@ -18,3 +18,8 @@ export const StyledAmount = styled.div`
   font-weight: bold;
   font-size: 18px;
 `;
+
+export const StyledDailyBalanceInput = styled.input`
+  margin-bottom: 15px;
+  background-color: #dcb1e6;
+`;
