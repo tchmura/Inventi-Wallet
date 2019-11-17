@@ -12,6 +12,7 @@ import {
 } from './transactionFormStyles';
 
 export const TransactionForm = ({ action, transaction }) => {
+  const history = useHistory();
   const [transactionToModify, setTransactionToModify] = useState(transaction);
   const [validationErrors, setValidationErrors] = useState({});
   const {
@@ -95,8 +96,6 @@ export const TransactionForm = ({ action, transaction }) => {
       body: JSON.stringify(transactionToModify)
     });
   };
-
-  const history = useHistory();
 
   const redirectToTransactions = () => {
     history.push('/');

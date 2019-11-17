@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   TransactionsList,
   StyledTransactionsList
@@ -12,31 +12,29 @@ import {
   StyledFilterButton,
   StyledBalancesButton
 } from './transactionsPageStyles';
+import { useLoadedTransactions } from '../../components/lib/useLoadedTransactions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const TransactionsPage = () => {
-  const [transactions, setTransactions] = useState([]);
+  const [
+    transactions,
+    setTransactions,
+    reloadTransactions
+  ] = useLoadedTransactions(null);
   const [filter, setFilter] = useState('ALL');
-
-  const loadTransactions = () => {
-    fetch('/transactions')
-      .then(res => res.json())
-      .then(response => setTransactions(response));
-  };
-
-  useEffect(() => {
-    loadTransactions();
-  }, []);
+  const history = useHistory();
 
   const toggleExpanded = transactionId => {
-    const updatedTransactions = transactions.map(transaction => {
-      if (transaction.id === transactionId) {
-        transaction.isExpanded = !transaction.isExpanded;
-      } else {
-        transaction.isExpanded = false;
-      }
-      return transaction;
-    });
+    const updatedTransactions =
+      transactions &&
+      transactions.map(transaction => {
+        if (transaction.id === transactionId) {
+          transaction.isExpanded = !transaction.isExpanded;
+        } else {
+          transaction.isExpanded = false;
+        }
+        return transaction;
+      });
 
     setTransactions(updatedTransactions);
   };
@@ -44,10 +42,8 @@ const TransactionsPage = () => {
   const handleDelete = id => {
     fetch(`/transactions/${id}`, {
       method: 'DELETE'
-    }).then(() => loadTransactions());
+    }).then(() => reloadTransactions());
   };
-
-  const history = useHistory();
 
   const redirectToNew = () => {
     history.push('transactions/new');

@@ -29,15 +29,18 @@ const TransactionsList = ({
     return transactions;
   };
 
-  return getFilteredTransactions(transactions).map(transaction => (
-    <Transaction
-      key={transaction.id}
-      transaction={transaction}
-      toggleExpanded={toggleExpanded}
-      handleEdit={() => handleEdit(transaction)}
-      handleDelete={() => handleDelete(transaction.id)}
-    />
-  ));
+  return (
+    transactions &&
+    getFilteredTransactions(transactions).map(transaction => (
+      <Transaction
+        key={transaction.id}
+        transaction={transaction}
+        toggleExpanded={toggleExpanded}
+        handleEdit={() => handleEdit(transaction)}
+        handleDelete={() => handleDelete(transaction.id)}
+      />
+    ))
+  );
 };
 
 export { TransactionsList };

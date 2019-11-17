@@ -1,23 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { MonthChart } from '../../components/Balances/MonthChart';
 import { TotalBalance } from '../../components/Balances/TotalBalance';
 import { StyledBalance } from '../../components/Balances/balancesStyles';
 import { DailyBalance } from '../../components/Balances/DailyBalance';
 import { StyledButton } from '../../components/shared/StyledButton';
+import { useLoadedTransactions } from '../../components/lib/useLoadedTransactions';
 
 export const BalancesPage = () => {
-  const [transactions, setTransactions] = useState(null);
+  const [transactions] = useLoadedTransactions(null);
   const history = useHistory();
-  const loadTransactions = () => {
-    fetch('/transactions')
-      .then(res => res.json())
-      .then(response => setTransactions(response));
-  };
-
-  useEffect(() => {
-    loadTransactions();
-  }, []);
 
   return (
     transactions && (
