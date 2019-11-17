@@ -32,12 +32,13 @@ const TransactionsPage = () => {
     const updatedTransactions =
       transactions &&
       transactions.map(transaction => {
-        if (transaction.id === transactionId) {
-          transaction.isExpanded = !transaction.isExpanded;
+        const newTransaction = transaction;
+        if (newTransaction.id === transactionId) {
+          newTransaction.isExpanded = !newTransaction.isExpanded;
         } else {
-          transaction.isExpanded = false;
+          newTransaction.isExpanded = false;
         }
-        return transaction;
+        return newTransaction;
       });
 
     setTransactions(updatedTransactions);
@@ -58,7 +59,7 @@ const TransactionsPage = () => {
   }, [transactions, currentPage, setPagination]);
 
   const getButtons = () => {
-    return Array(Math.round(transactions.length / 5)).fill();
+    return Array(Math.ceil(transactions.length / 5)).fill();
   };
 
   const handleDelete = id => {
